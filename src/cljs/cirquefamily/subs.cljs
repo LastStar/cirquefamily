@@ -11,3 +11,8 @@
  :active-panel
  (fn [db _]
    (reaction (:active-panel @db))))
+
+(re-frame/register-sub
+ :background-color
+  (fn [db _]
+    (reaction (:background-color @db))))

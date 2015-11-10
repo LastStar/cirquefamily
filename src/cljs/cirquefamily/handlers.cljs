@@ -11,3 +11,9 @@
  :set-active-panel
  (fn [db [_ active-panel]]
    (assoc db :active-panel active-panel)))
+
+(re-frame/register-handler
+ :change-background
+  (fn [db [_ new-color]]
+    (.log js/console new-color)
+    (assoc db :background-color new-color)))

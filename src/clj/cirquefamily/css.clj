@@ -1,23 +1,41 @@
 (ns cirquefamily.css
-  (:require [garden.def :refer [defstyles defkeyframes]]))
+  (:refer-clojure :exclude [+ - * / rem])
+  (:require [garden.units :as u :refer [px rem vh vw s]]
+            [cirquefamily.colors :as c]
+            [garden.arithmetic :refer [+ - * /]]
+            [garden.def :refer [defstyles defkeyframes]]))
+
+(def center "translate(calc(50vw - 130px), calc(50vh - 120px))")
+
+(defn scale [magnitude]
+  (str "scale(" magnitude ")"))
 
 (defkeyframes pulse
-  [:0% {:transform "translate(calc(50vw - 130px), calc(50vh - 120px)) scale(1.4)"}]
-  [:5% {:transform "translate(calc(50vw - 130px), calc(50vh - 120px)) scale(1.4)"}]
-  [:95% {:transform "translate(calc(50vw - 130px), calc(50vh - 120px)) scale(1.6)"}]
-  [:100% {:transform "translate(calc(50vw - 130px), calc(50vh - 120px)) scale(1.6)"}])
+  [:0% {:transform [[center (scale 1.8)]]}]
+  [:5% {:transform [[center (scale 1.8)]]}]
+  [:95% {:transform [[center (scale 2.4)]]}]
+  [:100% {:transform [[center (scale 2.4)]]}])
+
+(def standart-time (s 1.42))
 
 (defstyles screen
   pulse
   [:body
+   {:margin 0}
    [:svg
-    {:width "100vw"
-     :height "100vh"}
+    {:width (vw 100)
+     :height (vh 100)
+     :opacity 0.85
+     :background-color c/white
+     :transition [[:background-color standart-time]]}
     [:circle
-     {:fill "none"
-      :stroke-width "30"
-      :transform-origin "center"
-      :animation [[pulse "1.42s" :infinite :alternate]]}
-     [:&.outer {:stroke "#1c6fc1"}]
-     [:&.inner {:stroke "#9acc43"}]
-     [:&.bullseye {:stroke "#ff7d00"}]]]])
+     {:cursor :pointer
+      :fill :none
+      :stroke-width 25
+      :transform-origin :center
+      :opacity 0.75
+      :animation [[pulse standart-time :infinite :alternate]]}
+     [:&.outer {:stroke c/green}]
+     [:&.central {:stroke c/orange}]
+     [:&.inner {:stroke c/blue}]
+     [:&.bullseye {:stroke c/white}]]]])

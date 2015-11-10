@@ -1,17 +1,28 @@
 (ns cirquefamily.views
-    (:require [re-frame.core :as re-frame]))
+    (:require [re-frame.core :as re-frame]
+              [garden.color :as gc]
+              [cirquefamily.colors :as c]))
 
 ;; --------------------
 (defn home-panel []
   (let [name (re-frame/subscribe [:name])]
     (fn []
-      [:svg
-       [:circle.bullseye
-        {:cx 120 :cy 120 :r 15}]
-       [:circle.inner
-        {:cx 120 :cy 120 :r 45}]
-       [:circle.outer
-        {:cx 120 :cy 120 :r 75}]])))
+      (let [background-color (re-frame/subscribe [:background-color])]
+        [:svg
+         (when @background-color {:style {:background-color (gc/as-hex @background-color)}})
+         [:circle.bullseye
+          {:cx 120 :cy 120 :r 12.5
+           :style (when @background-color {:stroke (gc/as-hex @background-color)})
+           :on-click #(re-frame/dispatch [:change-background c/white])}]
+         [:circle.inner
+          {:cx 120 :cy 120 :r 35
+           :on-click #(re-frame/dispatch [:change-background c/blue])}]
+         [:circle.central
+          {:cx 120 :cy 120 :r 65
+           :on-click #(re-frame/dispatch [:change-background c/orange])}]
+         [:circle.outer
+          {:cx 120 :cy 120 :r 95
+           :on-click #(re-frame/dispatch [:change-background c/green])}]]))))
 
 (defn about-panel []
   (fn []

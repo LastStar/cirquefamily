@@ -8,8 +8,8 @@
 
   :source-paths ["src/clj"]
 
-  :plugins [[lein-cljsbuild "1.0.6"]
-            [lein-figwheel "0.3.3" :exclusions [cider/cider-nrepl]]
+  :plugins [[lein-cljsbuild "1.1.0"]
+            [lein-figwheel "0.4.1" :exclusions [cider/cider-nrepl]]
             [lein-garden "0.2.6"] ]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
@@ -19,13 +19,13 @@
   :figwheel {:css-dirs ["resources/public/css/compiled"]}
 
   :garden {:builds [{:id "screen"
-                     :source-paths ["src/clj"]
+                     :source-paths ["src/clj" "src/cljc"]
                      :stylesheet cirquefamily.css/screen
                      :compiler {:output-to "resources/public/css/compiled/screen.css"
                                 :pretty-print? true}}]}
 
   :cljsbuild {:builds [{:id "dev"
-                        :source-paths ["src/cljs"]
+                        :source-paths ["src/cljs" "src/cljc"]
 
                         :figwheel {:on-jsload "cirquefamily.core/mount-root"}
 
@@ -44,7 +44,7 @@
                                    :warnings {:single-segment-namespace false}}}
 
                        {:id "min"
-                        :source-paths ["src/cljs"]
+                        :source-paths ["src/cljs" "src/cljc"]
                         :compiler {:main cirquefamily.core
                                    :output-to "resources/public/js/compiled/app.js"
                                    :optimizations :advanced
