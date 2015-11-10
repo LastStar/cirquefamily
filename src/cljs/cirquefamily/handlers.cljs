@@ -15,5 +15,4 @@
 (re-frame/register-handler
  :change-background
   (fn [db [_ new-color]]
-    (.log js/console new-color)
     (assoc db :background-color new-color)))

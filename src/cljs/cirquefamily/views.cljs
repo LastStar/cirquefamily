@@ -12,7 +12,6 @@
          (when @background-color {:style {:background-color (gc/as-hex @background-color)}})
          [:circle.bullseye
           {:cx 120 :cy 120 :r 12.5
-           :style (when @background-color {:stroke (gc/as-hex @background-color)})
            :on-click #(re-frame/dispatch [:change-background c/white])}]
          [:circle.inner
           {:cx 120 :cy 120 :r 35
