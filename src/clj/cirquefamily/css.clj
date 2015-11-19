@@ -26,7 +26,7 @@
     {:width (vw 100)
      :height (vh 100)
      :opacity 0.85
-     :background-color c/white
+     :background-color c/light-blue
      :transition [[:background-color standart-time]]}
     [:circle
      {:cursor :pointer
@@ -38,4 +38,9 @@
      [:&.outer {:stroke c/green}]
      [:&.central {:stroke c/orange}]
      [:&.inner {:stroke c/blue}]
-     [:&.bullseye {:stroke c/white}]]]])
+     [:&.bullseye {:stroke c/light-blue}]]
+    [:path
+     {:fill :none
+      :transform-origin :center
+      :animation [[pulse standart-time :infinite :alternate]]
+      :stroke c/black}]]])

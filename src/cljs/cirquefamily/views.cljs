@@ -12,7 +12,7 @@
          (when @background-color {:style {:background-color (gc/as-hex @background-color)}})
          [:circle.bullseye
           {:cx 120 :cy 120 :r 12.5
-           :on-click #(re-frame/dispatch [:change-background c/white])}]
+           :on-click #(re-frame/dispatch [:change-background c/light-blue])}]
          [:circle.inner
           {:cx 120 :cy 120 :r 35
            :on-click #(re-frame/dispatch [:change-background c/blue])}]
