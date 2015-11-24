@@ -35,10 +35,15 @@
       :transform-origin :center
       :opacity 0.75
       :animation [[pulse standart-time :infinite :alternate]]}
+
      [:&.outer {:stroke c/green}]
      [:&.central {:stroke c/orange}]
      [:&.inner {:stroke c/blue}]
-     [:&.bullseye {:stroke c/light-blue}]]
+     [:&.bullseye {:stroke c/light-blue}]
+     [:&.band
+      {:stroke-width 10
+       :stroke c/white
+       :opacity 1}] ]
     [:path
      {:fill :none
       :transform-origin :center

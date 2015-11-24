@@ -21,7 +21,9 @@
            :on-click #(re-frame/dispatch [:change-background c/orange])}]
          [:circle.outer
           {:cx 120 :cy 120 :r 95
-           :on-click #(re-frame/dispatch [:change-background c/green])}]]))))
+           :on-click #(re-frame/dispatch [:change-background c/green])}]
+         [:circle.bullseye.band
+          {:cx 120 :cy 120 :r 22.5}]]))))
 
 (defn about-panel []
   (fn []
