@@ -1,18 +1,20 @@
 (ns cirquefamily.handlers
-    (:require [re-frame.core :as re-frame]
+    (:require [re-frame.core :as frame]
               [cirquefamily.db :as db]))
 
-(re-frame/register-handler
+(frame/register-handler
  :initialize-db
  (fn  [_ _]
    db/default-db))
 
-(re-frame/register-handler
+(frame/register-handler
  :set-active-panel
  (fn [db [_ active-panel]]
    (assoc db :active-panel active-panel)))
 
-(re-frame/register-handler
- :change-background
-  (fn [db [_ new-color]]
-    (assoc db :background-color new-color)))
+(frame/register-handler
+ :home-color-change
+  frame/trim-v
+  (fn [db [part]]
+    (let [new-color (get-in db [:colors part])]
+      (assoc db :home-color new-color))))

@@ -26,13 +26,13 @@
              :ring-handler cirquefamily.handler/handler}
 
   :garden {:builds [{:id "screen"
-                     :source-paths ["src/clj"]
+                     :source-paths ["src/clj" "src/cljc"]
                      :stylesheet cirquefamily.css/screen
                      :compiler {:output-to "resources/public/css/compiled/screen.css"
                                 :pretty-print? true}}]}
 
   :cljsbuild {:builds [{:id "dev"
-                        :source-paths ["src/cljs"]
+                        :source-paths ["src/cljs" "src/cljc"]
                         :figwheel {:on-jsload "cirquefamily.core/mount-root"}
                         :compiler {:main cirquefamily.core
                                    :output-to "resources/public/js/compiled/app.js"
@@ -41,13 +41,13 @@
                                    :source-map-timestamp true}}
 
                        {:id "test"
-                        :source-paths ["src/cljs" "test/cljs"]
+                        :source-paths ["src/cljs" "test/cljs" "src/cljc"]
                         :compiler {:output-to "resources/public/js/compiled/test.js"
                                    :main cirquefamily.runner
                                    :optimizations :none}}
 
                        {:id "min"
-                        :source-paths ["src/cljs"]
+                        :source-paths ["src/cljs" "src/cljc"]
                         :compiler {:main cirquefamily.core
                                    :output-to "resources/public/js/compiled/app.js"
                                    :optimizations :advanced

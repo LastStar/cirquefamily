@@ -5,47 +5,71 @@
             [garden.arithmetic :refer [+ - * /]]
             [garden.def :refer [defstyles defkeyframes]]))
 
-(def center "translate(calc(50vw - 130px), calc(50vh - 120px))")
+(def columns-count 12)
+(def column (u/vw (/ 100 columns-count)))
+(def sub-column (u/vw (/ 100 (* columns-count 4))))
+(def one-quarter (u/vw (* 100 1/4)))
+(def one-eighth (u/vw (* 100 1/8)))
+(def center "translate(calc(50vw - 120px), calc(50vh - 120px))")
 
 (defn scale [magnitude]
   (str "scale(" magnitude ")"))
 
 (defkeyframes pulse
-  [:0% {:transform [[center (scale 1.8)]]}]
-  [:5% {:transform [[center (scale 1.8)]]}]
-  [:95% {:transform [[center (scale 2.4)]]}]
-  [:100% {:transform [[center (scale 2.4)]]}])
+  [:0% {:transform [[center (scale 2)]]}]
+  [:5% {:transform [[center (scale 2)]]}]
+  [:90% {:transform [[center (scale 2.8)]]}]
+  [:100% {:transform [[center (scale 2.8)]]}])
 
-(def standart-time (s 1.42))
+(def duration
+  {:standart (s 1.42)
+   :long (s 3)})
+
+(defn transitional-prop
+  ([p] (transitional-prop p :standart))
+  ([p d]
+   {:transition [[p (d duration) :ease-in-out]]}))
 
 (defstyles screen
   pulse
+  [:html
+   {:font-size (u/pt 14)}]
   [:body
-   {:margin 0}
+   {:margin 0
+    :font-size (u/rem 1)}]
+  [:div#app
+   {:font-family "-apple-system-font, HelveticaNeue"}
+
    [:svg
-    {:width (vw 100)
-     :height (vh 100)
-     :opacity 0.85
-     :background-color c/light-blue
-     :transition [[:background-color standart-time]]}
+    (transitional-prop :background-color :long)
+    {:height (u/vh 93)
+     :background-color c/white}
     [:circle
      {:cursor :pointer
       :fill :none
-      :stroke-width 25
+      :stroke-width 20
       :transform-origin :center
-      :opacity 0.75
-      :animation [[pulse standart-time :infinite :alternate]]}
-
-     [:&.outer {:stroke c/green}]
-     [:&.central {:stroke c/orange}]
-     [:&.inner {:stroke c/blue}]
-     [:&.bullseye {:stroke c/light-blue}]
-     [:&.band
-      {:stroke-width 10
-       :stroke c/white
-       :opacity 1}] ]
-    [:path
-     {:fill :none
-      :transform-origin :center
-      :animation [[pulse standart-time :infinite :alternate]]
-      :stroke c/black}]]])
+      :animation [[pulse (:standart duration) :infinite :alternate "cubic-bezier(0.45, 0.05, 0.55, 0.95)"]]}
+     [:&.outer {:stroke c/blue}]
+     [:&.center {:stroke c/green}]
+     [:&.inner {:stroke c/red}]
+     [:&.bullseye {:stroke c/white}]]]]
+  [:div.header
+   {:height (u/vh 8)
+    :padding [[0 sub-column]]
+    :background (c/black)
+    :color (c/white)}
+   [:&>h1
+    (transitional-prop :color :long)
+    {:flex-grow 6
+     :-webkit-flex-grow 6
+     :font-size (u/rem 1.618)
+     :font-weight 900}]
+   [:&>div.navigation
+    [:&>a
+     (transitional-prop :all :standart)
+     {:font-weight :bold
+      :text-decoration :none}
+     [:&:hover
+      {:transform (scale 1.42)}]]]]
+  [:div.content])

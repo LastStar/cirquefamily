@@ -1,6 +1,7 @@
 (ns cirquefamily.subs
     (:require-macros [reagent.ratom :refer [reaction]])
-    (:require [re-frame.core :as re-frame]))
+    (:require [re-frame.core :as re-frame]
+              ))
 
 (re-frame/register-sub
  :name
@@ -13,6 +14,6 @@
    (reaction (:active-panel @db))))
 
 (re-frame/register-sub
- :background-color
+ :home-color
   (fn [db _]
-    (reaction (:background-color @db))))
+    (reaction (:home-color @db))))
