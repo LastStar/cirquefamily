@@ -3,34 +3,47 @@
               [garden.color :as gc]
               [cirquefamily.colors :as c]))
 
-;; --------------------
-(defn home-panel []
+
+;; home
+
+(defn home-title []
   (let [name (re-frame/subscribe [:name])]
     (fn []
-      (let [background-color (re-frame/subscribe [:background-color])]
-        [:svg
-         (when @background-color {:style {:background-color (gc/as-hex @background-color)}})
-         [:circle.bullseye
-          {:cx 120 :cy 120 :r 12.5
-           :on-click #(re-frame/dispatch [:change-background c/light-blue])}]
-         [:circle.inner
-          {:cx 120 :cy 120 :r 35
-           :on-click #(re-frame/dispatch [:change-background c/blue])}]
-         [:circle.central
-          {:cx 120 :cy 120 :r 65
-           :on-click #(re-frame/dispatch [:change-background c/orange])}]
-         [:circle.outer
-          {:cx 120 :cy 120 :r 95
-           :on-click #(re-frame/dispatch [:change-background c/green])}]
-         [:circle.bullseye.band
-          {:cx 120 :cy 120 :r 22.5}]]))))
+      [re-com/title
+       :label (str "Hello from " @name ". This is the Home Page.")
+       :level :level1])))
+
+(defn link-to-about-page []
+  [re-com/hyperlink-href
+   :label "go to About Page"
+   :href "#/about"])
+
+(defn home-panel []
+  [re-com/v-box
+   :gap "1em"
+   :children [[home-title] [link-to-about-page]]])
+
+
+;; about
+
+(defn about-title []
+  [re-com/title
+   :label "This is the About Page."
+   :level :level1])
+
+(defn link-to-home-page []
+  [re-com/hyperlink-href
+   :label "go to Home Page"
+   :href "#/"])
 
 (defn about-panel []
-  (fn []
-    [:div "This is the About Page."
-     [:div [:a {:href "#/"} "go to Home Page"]]]))
+  [re-com/v-box
+   :gap "1em"
+   :children [[about-title] [link-to-home-page]]])
 
-;; --------------------
+
+;; main
+
 (defmulti panels identity)
 (defmethod panels :home-panel [] [home-panel])
 (defmethod panels :about-panel [] [about-panel])
@@ -39,4 +52,6 @@
 (defn main-panel []
   (let [active-panel (re-frame/subscribe [:active-panel])]
     (fn []
-      (panels @active-panel))))
+      [re-com/v-box
+       :height "100%"
+       :children [(panels @active-panel)]])))

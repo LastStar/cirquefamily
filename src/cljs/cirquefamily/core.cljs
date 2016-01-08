@@ -4,7 +4,11 @@
               [cirquefamily.handlers]
               [cirquefamily.subs]
               [cirquefamily.routes :as routes]
-              [cirquefamily.views :as views]))
+              [cirquefamily.views :as views]
+              [cirquefamily.config :as config]))
+
+(when config/debug?
+  (println "dev mode"))
 
 (defn mount-root []
   (reagent/render [views/main-panel]
