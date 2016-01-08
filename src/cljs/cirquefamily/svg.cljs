@@ -2,7 +2,7 @@
   (:require [re-frame.core :as frame]))
 
 (defn home [background]
-  (let [dispatcher (fn [part] (frame/dispatch [:home-color-change part]))]
+  (let [dispatcher (fn [part] (frame/dispatch [:home-part-changed-to part]))]
     [:svg
      {:style {:background-color background}}
      [:circle.bullseye

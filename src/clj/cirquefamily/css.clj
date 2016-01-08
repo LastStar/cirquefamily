@@ -42,7 +42,7 @@
 
    [:svg
     (transitional-prop :background-color :long)
-    {:height (u/vh 93)
+    {:height (u/vh 92)
      :background-color c/white}
     [:circle
      {:cursor :pointer
@@ -55,21 +55,22 @@
      [:&.inner {:stroke c/red}]
      [:&.bullseye {:stroke c/white}]]]]
   [:div.header
-   {:height (u/vh 8)
-    :padding [[0 sub-column]]
-    :background (c/black)
-    :color (c/white)}
+   {:padding [[0 sub-column]]
+    :color (c/black)}
    [:&>h1
     (transitional-prop :color :long)
     {:flex-grow 6
      :-webkit-flex-grow 6
-     :font-size (u/rem 1.618)
+     :font-size (u/rem (* 1.618 1.618))
      :font-weight 900}]
    [:&>div.navigation
+    [:&>div>span
+     (transitional-prop :color :standart)]
     [:&>a
      (transitional-prop :all :standart)
      {:font-weight :bold
       :text-decoration :none}
      [:&:hover
       {:transform (scale 1.42)}]]]]
-  [:div.content])
+  [:div.content
+   {:padding [[0 sub-column]]}])

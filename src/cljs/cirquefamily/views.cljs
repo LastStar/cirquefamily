@@ -13,11 +13,12 @@
 
 (defn about-title []
   [com/title
-   :label "This is the About Page."
+   :label "About Cirque Family."
    :level :level1])
 
 (defn about-panel []
   [com/v-box
+   :class "content"
    :gap "1em"
    :children [[about-title]]])
 
@@ -48,6 +49,9 @@
      :justify :between
      :children
      [[link-to-home-page background]
+      [com/label
+       :style {:color background}
+       :label "|"]
       [link-to-about-page background]]])
 
 (defn header []

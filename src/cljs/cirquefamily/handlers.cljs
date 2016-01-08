@@ -13,7 +13,7 @@
    (assoc db :active-panel active-panel)))
 
 (frame/register-handler
- :home-color-change
+ :home-part-changed-to
   frame/trim-v
   (fn [db [part]]
     (let [new-color (get-in db [:colors part])]
