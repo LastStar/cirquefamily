@@ -7,7 +7,6 @@
   "Renders logo"
   []
   (fn []
-    (print @state)
     [:svg.eight.wide.column
      {:class (when (= @state :subscribing) "fade")
       :width "351px"
