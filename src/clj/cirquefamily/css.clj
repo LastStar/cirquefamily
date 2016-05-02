@@ -65,7 +65,8 @@
   [:footer
    {:font-family "VeganSuperiorMBL-Bold"
     :font-variant-caps :small-caps
-    :position :absolute
-    :right (u/rem 4)
-    :bottom (u/rem 2)
+    :font-size (u/rem 0.6)
+    :position :fixed
+    :right (u/rem 2)
+    :bottom (u/rem 1)
     :color "#FDFDFD"}]])
