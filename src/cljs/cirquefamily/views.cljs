@@ -55,16 +55,21 @@
       [:h1.ui.ten.wide.header "Cirque Family"]]
      [:main.ui.centered.grid
       [logo]
-      (when (= @state :subscribing)
-        (-> js/document .-body (aset "className" "light"))
+      (if (= @state :subscribing)
         [:form.ui.segment.fourteen.wide.column
          [:div.ui.field
-          [:h2 "In case you want to join us on our journey to family life embetterment as an volunteer, give us please"]
+          [:h2.ui.header
+           "In case you want to join us on our journey to family life embetterment as"
+           [:em " a\u00A0volunteer"]
+           ", give us please"]
           [:div.ui.action.input.massive
            [:input
-            {:placeholder "your email address."}]
+            {:placeholder "your email address."
+             :on-focus #(-> js/document .-body (aset "className" "light"))
+             :on-blur #(-> js/document .-body (aset "className" ""))}]
            [:button.ui.button.massive.orange "Take it!"]]
-          [:h4 "We will never spam you and first contact message will be written by human. So be patient please."]
-          [:h4 "EU citizens are prefered for now, for logistical and operational reasons."]
-          [:h4 "Parents of Cirque Family"]]])]
+          [:h4.ui.header "We will never spam you and first contact message will be written by human. So be patient please."]
+          [:h4.ui.header "EU citizens are prefered for now, for logistical and operational reasons."]
+          [:h4.ui.header "Parents of Cirque Family"]]]
+        (-> js/document .-body (aset "className" "")))]
      [:footer.ui.footer "\u00A9 Cirque Family 2016"]]))

@@ -30,7 +30,7 @@
     :margin 0
     :font-size (u/rem 1)
     :background-color "#020202"
-    :transition [[:background-color (u/s 8) :ease-out]]}
+    :transition [[:background-color (u/s 6.48) :ease-out]]}
    [:&.light
     {:background-color :white}
     [:header.ui.centered.grid>h1.ui.header
@@ -40,7 +40,7 @@
   [:header.ui.centered.grid
    {:padding [[(u/rem 4) 0]]}
    [:h1.ui.header
-    {:transition [[:color (u/s 8) :ease-out]]
+    {:transition [[:color (u/s 6.48) :ease-out]]
      :animation [[reveal (u/s 3.24) :ease :forwards]]
      :font-family "VeganSuperiorMBL-Bold"
      :font-variant-caps :small-caps
