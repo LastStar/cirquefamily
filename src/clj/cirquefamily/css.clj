@@ -29,11 +29,19 @@
    {:font-family "VeganSuperiorMBL-Bold"
     :margin 0
     :font-size (u/rem 1)
-    :background-color "#020202"}]
+    :background-color "#020202"
+    :transition [[:background-color (u/s 8) :ease-out]]}
+   [:&.light
+    {:background-color :white}
+    [:header.ui.centered.grid>h1.ui.header
+     {:color :black}]
+    [:footer
+     {:color :black}]]
   [:header.ui.centered.grid
    {:padding [[(u/rem 4) 0]]}
    [:h1.ui.header
-    {:animation [[reveal (u/s 3.24) :ease :forwards]]
+    {:transition [[:color (u/s 8) :ease-out]]
+     :animation [[reveal (u/s 3.24) :ease :forwards]]
      :font-family "VeganSuperiorMBL-Bold"
      :font-variant-caps :small-caps
      :color "#FDFDFD"
@@ -45,6 +53,9 @@
     {:animation [[pulse (u/s 3.24) 1 :ease :forwards]]
      :margin [[(u/rem 12) 0 (u/rem -6)]]
      :padding "0px !important"}
+    [:&.fade
+     [:path :circle
+      {:opacity 0.7}]]
     [:#CF :#text
      {:cursor :pointer}]]
    [:form
@@ -57,4 +68,4 @@
     :position :absolute
     :right (u/rem 4)
     :bottom (u/rem 2)
-    :color "#FDFDFD"}])
+    :color "#FDFDFD"}]])

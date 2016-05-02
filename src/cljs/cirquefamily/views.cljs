@@ -1,6 +1,5 @@
 (ns cirquefamily.views
     (:require [re-frame.core :as frame]
-              [re-frame.utils :as utils]
               [cirquefamily.svg :as svg]))
 
 (defn home-panel []
@@ -12,6 +11,7 @@
        [:main.ui.centered.grid
         [svg/logo]
         (when @show-subscribe
+          (-> js/document .-body (aset "className" "light"))
           [:form.ui.segment.fourteen.wide.column
            [:div.ui.field
             [:h2 "In case you want to join us, on our journey to family life embetterment as an volunteer helper, give us please"]

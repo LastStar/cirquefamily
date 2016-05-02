@@ -8,7 +8,7 @@
     (let [logo-clicked (frame/subscribe [:logo-clicked])
           show-subscribe (frame/subscribe [:show-subscribe])]
       [:svg.eight.wide.column
-       {
+       {:class (when @show-subscribe "fade")
         :width "351px"
         :height "351px"
         :viewBox "0 0 351 351"
@@ -28,17 +28,16 @@
            :fill "none"
            :fill-rule "evenodd"
            :transform "translate(89.000000, 90.000000)"}
-  [:circle {:id "Oval-3", :fill "#FDFDFD", :cx "87.5", :cy "86.5", :r "86.5"}]
-  [:text {:id "We-are", :font-family "VeganSuperiorMBL-Bold, Vegan Sans", :font-size "19.7999992", :font-weight "700"}
-   [:tspan {:x "53.0677013", :y "39", :fill "#081019"} "We are"]
-   [:tspan {:x "16.577", :y "60", :font-size "14", :fill "#081019"} " solving problems of "]
-   [:tspan {:x "0.05", :y "78", :font-size "14", :fill "#081019"} "companies, "]
-   [:tspan {:x "81.796", :y "78", :font-size "14", :fill "#08101A"} "corporations, "]
-   [:tspan {:x "14.533", :y "96", :font-size "14", :fill "#081019"} "states and so on, but "]
-   [:tspan {:x "7.694", :y "114", :font-size "14", :fill "#081019"} "maybe we should solve "]
-   [:tspan {:x "11.278", :y "132", :font-size "14", :fill "#081019"} "our families problems"]
-   [:tspan {:x "63.4726009", :y "158", :fill "#081019"} "first."]]]
-         
+          [:circle {:id "Oval-3", :fill "#FDFDFD", :cx "87.5", :cy "86.5", :r "86.5"}]
+          [:text {:id "We-are", :font-family "VeganSuperiorMBL-Bold, Vegan Sans", :font-size "19.7999992", :font-weight "700"}
+           [:tspan {:x "53.0677013", :y "39", :fill "#081019"} "We are"]
+           [:tspan {:x "16.577", :y "60", :font-size "14", :fill "#081019"} " solving problems of "]
+           [:tspan {:x "0.05", :y "78", :font-size "14", :fill "#081019"} "companies, "]
+           [:tspan {:x "81.796", :y "78", :font-size "14", :fill "#08101A"} "corporations, "]
+           [:tspan {:x "14.533", :y "96", :font-size "14", :fill "#081019"} "states and so on, but "]
+           [:tspan {:x "7.694", :y "114", :font-size "14", :fill "#081019"} "maybe we should solve "]
+           [:tspan {:x "11.278", :y "132", :font-size "14", :fill "#081019"} "our families problems"]
+           [:tspan {:x "63.4726009", :y "158", :fill "#081019"} "first."]]]
          [:path
           {:on-click #(frame/dispatch [:logo-clicked])
            :d "M152.916,186.76 C152.296,197.796 148.7,203.624 139.896,203.624 C128.488,203.624 125.14,191.596 125.14,175.6 C125.14,159.604 129.356,147.576 139.896,147.576 C148.7,147.576 152.296,153.404 152.916,164.44 L176.228,164.44 C175.484,141.128 160.852,130.34 139.896,130.34 C116.46,130.34 100.96,148.196 100.96,175.6 C100.96,203.004 112.74,220.86 139.896,220.86 C160.852,220.86 175.484,210.072 176.228,186.76 L152.916,186.76 Z M211.568,219 L211.568,184.404 L240.708,184.404 L240.708,167.168 L211.568,167.168 L211.568,149.436 L243.188,149.436 L243.188,132.2 L188.628,132.2 L188.628,219 L211.568,219 Z"
