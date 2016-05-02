@@ -14,6 +14,11 @@
    (reaction (:active-panel @db))))
 
 (re-frame/register-sub
- :home-color
+ :logo-clicked
+ (fn [db _]
+   (reaction (:logo-clicked @db))))
+
+(re-frame/register-sub
+ :show-subscribe
   (fn [db _]
-    (reaction (:home-color @db))))
+    (reaction (:show-subscribe @db))))

@@ -10,26 +10,21 @@
 
 (defkeyframes pulse
   [:0% {:transform (scale 0.9)
-        :-webkit-filter "blur(20px)"
         :opacity 0.1}]
   [:50% {:transform (scale 2.1)
-         :-webkit-filter "blur(0px)"
          :opacity 1}]
   [:100% {:transform (scale 2.1)
          :opacity 1}])
 
 (defkeyframes reveal
-  [:0% {:-webkit-filter "blur(20px)"
-        :opacity 0.1}]
-  [:50% {:-webkit-filter "blur(0px)"
-         :opacity 1}]
+  [:0% {:opacity 0.1}]
   [:100% {:opacity 1}])
 
 (defstyles screen
   pulse
   reveal
   [:html
-   {:font-size (u/pt 14)}]
+   {:font-size (u/px 14)}]
   [:body
    {:font-family "VeganSuperiorMBL-Bold"
     :margin 0
@@ -44,14 +39,22 @@
      :color "#FDFDFD"
      :font-size "101.75px"}]]
   [:main
+   {:text-align :center
+    :margin-bottom (u/rem 2)}
    [:svg
     {:animation [[pulse (u/s 3.24) 1 :ease :forwards]]
-     :margin [[(u/rem 6) 0 (u/rem 12)]]
-     :padding "0px !important"
-     :cursor :pointer}]]
+     :margin [[(u/rem 12) 0 (u/rem -6)]]
+     :padding "0px !important"}
+    [:#CF :#text
+     {:cursor :pointer}]]
+   [:form
+    {:animation [[reveal (u/s 1.62) :ease :forwards]]}
+    [:>div
+     {:text-align :center}]]]
   [:footer
    {:font-family "VeganSuperiorMBL-Bold"
     :font-variant-caps :small-caps
-    :position :relative
-    :color "#FDFDFD"
-    :bottom 0}])
+    :position :absolute
+    :right (u/rem 4)
+    :bottom (u/rem 2)
+    :color "#FDFDFD"}])
