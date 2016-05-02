@@ -51,7 +51,7 @@
     :margin-bottom (u/rem 2)}
    [:svg
     {:animation [[pulse (u/s 3.24) 1 :ease :forwards]]
-     :margin [[(u/rem 12) 0 (u/rem -6)]]
+     :margin [[(u/rem 12) 0 (u/rem -1)]]
      :padding "0px !important"}
     [:&.fade
      [:path :circle

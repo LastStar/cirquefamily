@@ -1,6 +1,6 @@
 # cirquefamily
 
-A [re-frame](https://github.com/Day8/re-frame) application designed to provide landing page for [Cirque Family](http://cirquefamily.com).
+An application designed to provide landing page for [Cirque Family](http://cirquefamily.com).
 
 ## Development Mode
 
