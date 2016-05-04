@@ -8,7 +8,7 @@
 (defn scale [magnitude]
   (str "scale(" magnitude ")"))
 
-(defkeyframes pulse
+(defkeyframes zoom-in
   [:0% {:transform (scale 0.9)
         :opacity 0.1}]
   [:50% {:transform (scale 2.1)
@@ -20,17 +20,29 @@
   [:0% {:opacity 0.1}]
   [:100% {:opacity 1}])
 
+(defkeyframes pulse
+  [:0% {:transform (scale 1)}]
+  [:90% {:transform (scale 1)}]
+  [:96% {:transform (scale 1.14)}]
+  [:100% {:transform (scale 1.04)}])
+
+(def breath-time (u/s 1.62))
+
 (defstyles screen
-  pulse
+  zoom-in
   reveal
+  pulse
   [:html
    {:font-size (u/px 14)}]
+  [:body :.ui.button :.ui.input>input
+   {:font-family "Vegan Sans"}]
+  [:#last :#first
+   {:font-weight 900}]
   [:body
-   {:font-family "VeganSuperiorMBL-Bold"
-    :margin 0
+   {:margin 0
     :font-size (u/rem 1)
     :background-color "#020202"
-    :transition [[:background-color (u/s 6.48) :ease-out]]}
+    :transition [[:background-color (* 3 breath-time) :ease-out]]}
    [:&.light
     {:background-color :white}
     [:header.ui.centered.grid>h1.ui.header
@@ -40,8 +52,8 @@
   [:header.ui.centered.grid
    {:padding [[(u/rem 4) 0]]}
    [:h1.ui.header
-    {:transition [[:color (u/s 6.48) :ease-out]]
-     :animation [[reveal (u/s 3.24) :ease :forwards]]
+    {:transition [[:color (* 3 breath-time) :ease-out]]
+     :animation [[reveal (* 2 breath-time) :ease :forwards]]
      :font-family "VeganSuperiorMBL-Bold"
      :font-variant-caps :small-caps
      :color "#FDFDFD"
@@ -50,18 +62,21 @@
    {:text-align :center
     :margin-bottom (u/rem 2)}
    [:svg
-    {:animation [[pulse (u/s 3.24) 1 :ease :forwards]]
+    {:animation [[zoom-in (* 2 breath-time) 1 :ease :forwards]]
      :margin [[(u/rem 12) 0 (u/rem -1)]]
      :padding "0px !important"}
-    [:#CF :#text
-     {:cursor :pointer}]]
+    [:#text :#CF
+     {:cursor :pointer}]
+    [:#CF.initial
+     {:animation [[pulse (* 2 breath-time) :ease :infinite :alternate]]
+      :transform-origin :center}]]
    [:div.subscribe
-    {:animation [[reveal (u/s 1.62) :ease :forwards]]}
+    {:animation [[reveal breath-time :ease :forwards]]}
     [:&>form>div
      {:text-align :center}]]
    [:div.parents
-    {:animation [[reveal (u/s 1.62) :ease :forwards]]
-     :justify-content :space-between}
+    {:animation [[reveal breath-time :ease :forwards]]
+     :justify-content :space-around}
     [:img
      {:-webkit-filter "grayscale(70%)"}
      [:&:hover
