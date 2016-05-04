@@ -53,19 +53,23 @@
     {:animation [[pulse (u/s 3.24) 1 :ease :forwards]]
      :margin [[(u/rem 12) 0 (u/rem -1)]]
      :padding "0px !important"}
-    [:&.fade
-     [:path :circle
-      {:opacity 0.7}]]
     [:#CF :#text
      {:cursor :pointer}]]
-   [:form
+   [:div.subscribe
     {:animation [[reveal (u/s 1.62) :ease :forwards]]}
-    [:>div
-     {:text-align :center}]]]
+    [:&>form>div
+     {:text-align :center}]]
+   [:div.parents
+    {:justify-content :space-between}
+    [:img
+     {:-webkit-filter "grayscale(70%)"}
+     [:&:hover
+      {:-webkit-filter "grayscale(0%)"}]]]
+   [:.ui.cards:after :.ui.card:after
+    {:display :none}]]
   [:footer
    {:font-family "VeganSuperiorMBL-Bold"
     :font-variant-caps :small-caps
-    :font-size (u/rem 0.6)
     :position :fixed
     :right (u/rem 2)
     :bottom (u/rem 1)
