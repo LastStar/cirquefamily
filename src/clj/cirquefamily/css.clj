@@ -3,17 +3,18 @@
   (:require [garden.units :as u :refer [px rem vh vw s]]
             [cirquefamily.colors :as c]
             [garden.arithmetic :refer [+ - * /]]
-            [garden.def :refer [defstyles defkeyframes]]))
+            [garden.def :refer [defstyles defkeyframes]]
+            [garden.stylesheet :refer [at-media]]))
 
 (defn scale [magnitude]
   (str "scale(" magnitude ")"))
 
 (defkeyframes zoom-in
-  [:0% {:transform (scale 0.9)
+  [:0% {:transform (scale 0.7)
         :opacity 0.1}]
-  [:50% {:transform (scale 2.1)
+  [:50% {:transform (scale 1.9)
          :opacity 1}]
-  [:100% {:transform (scale 2.1)
+  [:100% {:transform (scale 1.9)
          :opacity 1}])
 
 (defkeyframes reveal
@@ -34,8 +35,8 @@
   pulse
   [:html
    {:font-size (u/px 14)}]
-  [:body :.ui.button :.ui.input>input
-   {:font-family "Vegan Sans"}]
+  [:body :.ui.button :.ui.input>input :h4 :h1
+   {:font-family "Vegan Sans !important"}]
   [:#last :#first
    {:font-weight 900}]
   [:body
@@ -54,16 +55,16 @@
    [:h1.ui.header
     {:transition [[:color (* 3 breath-time) :ease-out]]
      :animation [[reveal (* 2 breath-time) :ease :forwards]]
-     :font-family "VeganSuperiorMBL-Bold"
+     :font-weight 900
      :font-variant-caps :small-caps
      :color "#FDFDFD"
-     :font-size "101.75px"}]]
+     :font-size (u/rem 7.27)}]]
   [:main
    {:text-align :center
     :margin-bottom (u/rem 2)}
    [:svg
     {:animation [[zoom-in (* 2 breath-time) 1 :ease :forwards]]
-     :margin [[(u/rem 12) 0 (u/rem -1)]]
+     :margin [[(u/rem 12) 0 0]]
      :padding "0px !important"}
     [:#text :#CF
      {:cursor :pointer}]
@@ -76,7 +77,9 @@
      {:text-align :center}]]
    [:div.parents
     {:animation [[reveal breath-time :ease :forwards]]
-     :justify-content :space-around}
+     :margin-bottom [[(u/rem 4) "!important"]]}
+    [:&>div.ui.cards
+     {:justify-content :space-around}]
     [:img
      {:-webkit-filter "grayscale(70%)"}
      [:&:hover
@@ -89,4 +92,20 @@
     :position :fixed
     :right (u/rem 2)
     :bottom (u/rem 1)
-    :color "#FDFDFD"}]])
+    :color "#FDFDFD"}]]
+  (at-media {:screen true
+             :max-width "694px"}
+            [:header>h1 {:font-size [[(u/rem 6) "!important"]]}])
+  (at-media {:screen true
+             :max-width "507px"}
+            [:header>h1 {:font-size [[(u/rem 5) "!important"]]}]
+            [:main>svg {:margin-top [[(u/rem 2) "!important"]]}])
+  (at-media {:screen true
+             :max-width "438px"}
+            [:html {:font-size (u/px 10)}]
+            [:main>svg {:margin-top [[(u/rem 0) "!important"]]}])
+  
+  (at-media {:screen true
+             :max-width "320px"}
+            [:header>h1 {:font-size [[(u/rem 4) "!important"]]}]
+            [:.ui.input>input {:width (u/rem 16)}]))
