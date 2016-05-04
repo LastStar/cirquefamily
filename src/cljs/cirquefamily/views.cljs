@@ -43,7 +43,7 @@
          :transform "translate(89.000000, 90.000000)"}
         [:circle {:id "Oval-3", :fill "#FDFDFD", :cx "87.5", :cy "86.5", :r "86.5"}]
         [:text
-         {:id "last"
+         {:id "first"
           :font-family "Vegan Sans"
           :font-size "14"
           :font-weight "700"}
@@ -65,8 +65,9 @@
          :transform "translate(89.000000, 90.000000)"}
         [:circle {:id "Oval-3", :fill "#FAFAFA", :cx "87.5", :cy "86.5", :r "86.5"}]
         [:text
-         {:id "first"
+         {:id "last"
           :font-family "Vegan Sans"
+          :font-size "14"
           :fill "#081019"}
          [:tspan {:x "53.0677013", :y "36", :font-size "19.7999992"} "We are"]
          [:tspan {:x "21.925", :y "60"} " not without faults "]

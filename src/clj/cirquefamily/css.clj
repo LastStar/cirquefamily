@@ -37,8 +37,6 @@
    {:font-size (u/px 14)}]
   [:body :.ui.button :.ui.input>input :h4 :h1
    {:font-family "Vegan Sans !important"}]
-  [:#last :#first
-   {:font-weight 900}]
   [:body
    {:margin 0
     :font-size (u/rem 1)
@@ -66,13 +64,16 @@
     {:animation [[zoom-in (* 2 breath-time) 1 :ease :forwards]]
      :margin [[(u/rem 12) 0 0]]
      :padding "0px !important"}
+    [:#last :#first
+     {:font-weight 900}]
     [:#text :#CF
      {:cursor :pointer}]
     [:#CF.initial
      {:animation [[pulse (* 2 breath-time) :ease :infinite :alternate]]
       :transform-origin :center}]]
    [:div.subscribe
-    {:animation [[reveal breath-time :ease :forwards]]}
+    {:animation [[reveal breath-time :ease :forwards]]
+     :margin-bottom [[(u/rem 4) "!important"]]}
     [:&>form>div
      {:text-align :center}]]
    [:div.parents
@@ -89,8 +90,9 @@
   [:footer
    {:font-family "VeganSuperiorMBL-Bold"
     :font-variant-caps :small-caps
+    :z-index -1
     :position :fixed
-    :right (u/rem 2)
+    :right (u/rem 3)
     :bottom (u/rem 1)
     :color "#FDFDFD"}]]
   (at-media {:screen true
