@@ -60,7 +60,8 @@
     [:&>form>div
      {:text-align :center}]]
    [:div.parents
-    {:justify-content :space-between}
+    {:animation [[reveal (u/s 1.62) :ease :forwards]]
+     :justify-content :space-between}
     [:img
      {:-webkit-filter "grayscale(70%)"}
      [:&:hover

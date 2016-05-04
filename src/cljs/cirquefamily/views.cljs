@@ -114,27 +114,36 @@
         (= @state :parents)
         [:div.ui.segment.fourteen.wide.column.grid
          [:div.parents.ui.cards
-         [:div.ui.card
-          [:div.ui.image
-           [:img
-           {:src "/img/vendi.jpg"}]]
-          [:div.ui.content
-           [:div.header "Vendula Pospíšilová"]
-           [:p "Woman behind the steering wheel, loving mother, the great initiator and the light of the project"]]]
-         [:div.ui.card
-          [:div.ui.image
-           [:img
-            {:src "/img/pepe.jpg"}]]
-          [:div.ui.content
-           [:div.header "Josef Pospíšil"]
-           [:p "Man behind the computer, loving father, metal dragon in both chinese calendar and humor."]]]
-         [:div.ui.card
-          [:div.ui.image
-           [:img
-            {:src "/img/mariana.jpg"}]]
-          [:div.ui.content
-           [:div.header "Mariana Klementová"]
-           [:p "Woman behind the scene, loving mother, the great inspirator and the soul of the project"]]]]]
+          [:div.ui.card
+           [:div.ui.image
+            [:img
+             {:src "/img/vendi.jpg"}]]
+           [:div.ui.content
+            [:div.header "Vendula Pospíšilová"]
+            [:p "Woman behind the steering wheel, loving mother, the great initiator and the light of the project"]]]
+          [:div.ui.card
+           [:div.ui.image
+            [:img
+             {:src "/img/pepe.jpg"}]]
+           [:div.ui.content
+            [:div.header "Josef Pospíšil"]
+            [:p "Man behind the computer, loving father, metal dragon in both chinese calendar and humor."]]]
+          [:div.ui.card
+           [:div.ui.image
+            [:img
+             {:src "/img/mariana.jpg"}]]
+           [:div.ui.content
+            [:div.header "Mariana Klementová"]
+            [:p "Woman behind the scene, loving mother, the great inspirator and the soul of the project"]]]
+          [:div.ui.card
+           {:on-click #(reset! state :subscribing)
+            :style {:cursor :pointer}}
+           [:div.ui.image
+            [:img
+             {:src "/img/volunteer.jpg"}]]
+           [:div.ui.content
+            [:div.header "Next Volunteer"]
+            [:p "Do you want to become part of our team? Please become volunteer by giving us a email address"]]]]]
         :else
         [:div
          {:style {:display :none}}
