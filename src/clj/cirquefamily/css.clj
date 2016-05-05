@@ -56,7 +56,8 @@
      :font-weight 900
      :font-variant-caps :small-caps
      :color "#FDFDFD"
-     :font-size (u/rem 7.27)}]]
+     :font-size (u/rem 7.27)
+     :cursor :pointer}]]
   [:main
    {:text-align :center
     :margin-bottom (u/rem 2)}

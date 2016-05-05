@@ -101,7 +101,9 @@
   (fn []
     [:div.ui.container
      [:header.ui.centered.grid
-      [:h1.ui.ten.wide.header "Cirque Family"]]
+      [:h1.ui.ten.wide.header
+       {:on-click #(reset! state :initial)}
+       "Cirque Family"]]
      [:main.ui.centered.grid
       [logo]
       (cond
