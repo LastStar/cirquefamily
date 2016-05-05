@@ -1,9 +1,14 @@
 (ns cirquefamily.views
-    (:require [reagent.core :as r]))
+  (:require
+   [reagent.core :as r]
+   [goog.format.EmailAddress]))
 
 (def state (r/atom :initial))
 
 (def submitted (r/atom false))
+
+(def email-error (r/atom false))
+
 
 (defn logo
   "Renders logo"
@@ -52,9 +57,9 @@
          [:tspan {:x "0.05", :y "78", :fill "#081019"} "companies, "]
          [:tspan {:x "81.796", :y "78", :fill "#08101A"} "corporations, "]
          [:tspan {:x "14.533", :y "96", :fill "#081019"} "states and so on, but "]
-         [:tspan {:x "7.694", :y "114", :fill "#081019"} "maybe we should solve "]
-         [:tspan {:x "11.278", :y "132", :fill "#081019"} "our families' problems"]
-         [:tspan {:x "63.4726009", :y "158", :font-size "19.7999992", :fill "#081019"} "first."]]]
+         [:tspan {:x "7.694", :y "114", :fill "#081019"} "shouldn't we solve our"]
+         [:tspan {:x "21.278", :y "132", :fill "#081019"} "families' problems"]
+         [:tspan {:x "63.4726009", :y "158", :font-size "19.7999992", :fill "#081019"} "first?"]]]
        (= @state :parents)
        [:g
         {:id "parents-text"
@@ -84,6 +89,14 @@
                 (reset! state :parents))}
    "Parents of Cirque Family"])
 
+(defn process-email
+  "Processes email"
+  [email]
+  (reset! state :thank)
+  (reset! submitted true)
+  ;; Send email through api
+  (print email))
+
 (defn home-panel []
   (fn []
     [:div.ui.container
@@ -96,11 +109,13 @@
         [:div.subscribe.ui.segment.fourteen.wide.column
          [:form
           {:on-submit (fn [e]
-                        (reset! state :thank)
-                        (reset! submitted true)
-                        (print (.-value (aget (.-target e) 0)))
-                        (.stopPropagation e)
-                        (.preventDefault e))}
+                        (let [form (.-target e)
+                              email (.-value (aget form 0))]
+                          (.stopPropagation e)
+                          (.preventDefault e)
+                          (if (.isValid (goog.format.EmailAddress. email))
+                            (process-email email)
+                            (reset! email-error true))))}
           [:div.ui.field
            [:h2.ui.header
             "In case you want to "
@@ -112,18 +127,22 @@
             [:input
              {:name :email
               :placeholder "your email address"
+              :on-change #(reset! email-error (not (-> % .-target .-value goog.format.EmailAddress. .isValid)))
               :on-focus #(-> js/document .-body (aset "className" "light"))
-              :on-blur #(-> js/document .-body (aset "className" ""))}]
+              :on-blur (fn []
+                         (reset! email-error false)
+                         (-> js/document .-body (aset "className" "")))}]
             [:button.ui.button.huge.orange "please"]]
+           (when @email-error [:div.ui.message.warning "Email is not valid!"])
            [:h4.ui.header "We will never spam you and first contact message will be written by human. So be patient please."]
            [:h4.ui.header "EU citizens are prefered for now, because of logistical and operational reasons."]
-           [:h4.ui.header "Czech and English are the only official languages, for now."]
+           [:h4.ui.header "English is the official language, Czech is OK for communication."]
            parents-button]]]
         (= @state :parents)
         [:div.parents.ui.segment.fourteen.wide.column.grid
          [:p.ui.text "We are couple of friendly families with drive to make our kids life better than was our own. The plan is to make platform in the clouds, where you will be able to make your family life and kids development better through simple applications."]
          [:p.ui.text "First two: daily like/dislike, weekly family council, are planed for immediate future, so stay tuned. The main part thou, will be one with guides and FAQ with information we think is relevant for this age's education and care." ]
-         (when (not @submitted)[:p.ui.text "If you find this interesting, please consider to become our next volunteer." ])
+         (when (not @submitted)[:p.ui.text "If you find this interesting, please consider to become our next volunteer. We are searching mostly testers, donors and the good will." ])
          [:div.ui.cards
           [:div.ui.card
            [:div.ui.image

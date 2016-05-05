@@ -10,7 +10,7 @@
   (str "scale(" magnitude ")"))
 
 (defkeyframes zoom-in
-  [:0% {:transform (scale 0.7)
+  [:0% {:transform [[(scale 0.3) "rotateX(90deg)"]]
         :opacity 0.1}]
   [:50% {:transform (scale 1.9)
          :opacity 1}]
@@ -18,7 +18,7 @@
          :opacity 1}])
 
 (defkeyframes reveal
-  [:0% {:opacity 0.1}]
+  [:0% {:opacity 0.2}]
   [:100% {:opacity 1}])
 
 (defkeyframes pulse
@@ -61,7 +61,7 @@
    {:text-align :center
     :margin-bottom (u/rem 2)}
    [:svg
-    {:animation [[zoom-in (* 2 breath-time) 1 :ease :forwards]]
+    {:animation [[zoom-in (* 5 breath-time) 1 :ease-out :forwards]]
      :margin [[(u/rem 12) 0 0]]
      :padding "0px !important"}
     [:#last :#first
